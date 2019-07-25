@@ -1,0 +1,14 @@
+{
+    "windows": {
+        "awscloudformation": {
+            "AuthRoleName": "awsamplify-windows-20190725135413-authRole",
+            "UnauthRoleArn": "arn:aws:iam::002807997966:role/awsamplify-windows-20190725135413-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::002807997966:role/awsamplify-windows-20190725135413-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "awsamplify-windows-20190725135413-deployment",
+            "UnauthRoleName": "awsamplify-windows-20190725135413-unauthRole",
+            "StackName": "awsamplify-windows-20190725135413",
+            "StackId": "arn:aws:cloudformation:us-east-2:002807997966:stack/awsamplify-windows-20190725135413/9694f990-aeb5-11e9-a352-0aa0cd9d9f9c"
+        }
+    }
+}
