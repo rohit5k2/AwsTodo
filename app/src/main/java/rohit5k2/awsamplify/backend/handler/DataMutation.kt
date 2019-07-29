@@ -7,22 +7,30 @@ import type.CreateTodoInput
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.GraphQLCall
 import com.apollographql.apollo.api.Response
+import rohit5k2.awsamplify.utils.L
 
 
-class DataMutation(context: Context, notifyUI: NotifyUI):DataHandlerBase(context) {
-    private var _notifyUI = notifyUI
-
+class DataMutation<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBase<T>(context, notifyUI) {
     fun add(createToDoInput:CreateTodoInput){
         AWSCommHandler.mAwsAppSyncClient
             .mutate(CreateTodoMutation.builder().input(createToDoInput).build())
             .enqueue(object : GraphQLCall.Callback<CreateTodoMutation.Data>() {
                         override fun onResponse(response: Response<CreateTodoMutation.Data>) {
-                            _notifyUI.onComplete()
+                            // Don't notify UI. let the updation come from subscription
+                            //_notifyUI.onData()
                         }
 
                         override fun onFailure(e: ApolloException) {
-                            _notifyUI.onError(e.message)
+                            //_notifyUI.onError(e.message)
                         }}
                     )
+    }
+
+    fun delete(){
+
+    }
+
+    fun edit(){
+
     }
 }
