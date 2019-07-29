@@ -1,6 +1,7 @@
 package rohit5k2.awsamplify.ui
 
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amazonaws.amplify.generated.graphql.ListTodosQuery
 import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils
@@ -12,6 +13,8 @@ import rohit5k2.awsamplify.backend.helper.NotifyUI
 import rohit5k2.awsamplify.ui.helper.ToDoAdapter
 import rohit5k2.awsamplify.utils.L
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import rohit5k2.awsamplify.ui.helper.SwipeToDeleteCallback
 
 class MainActivity : BaseActivity() {
 
@@ -33,9 +36,17 @@ class MainActivity : BaseActivity() {
 
     private fun loadToDoItems(data: MutableList<ListTodosQuery.Item>?){
         toDoAdapter = ToDoAdapter(this@MainActivity, data)
+        lv_todo.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         lv_todo.layoutManager = LinearLayoutManager(this)
         lv_todo.adapter = toDoAdapter
-        val itemTouchHelper = ItemTouchHelper(ToDoAdapter.SwipeToDeleteCallback(toDoAdapter as ToDoAdapter))
+
+        val swipeHandler = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = lv_todo.adapter as ToDoAdapter
+                adapter.deleteItem(viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(lv_todo)
     }
 
