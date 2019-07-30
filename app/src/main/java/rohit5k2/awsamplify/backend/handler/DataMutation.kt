@@ -38,7 +38,7 @@ class DataMutation<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBase<T
                 }
 
                 override fun onResponse(response: Response<DeleteTodoMutation.Data>) {
-                    _notifyUI.onComplete()
+                    //_notifyUI.onComplete()
                 }
             })
     }

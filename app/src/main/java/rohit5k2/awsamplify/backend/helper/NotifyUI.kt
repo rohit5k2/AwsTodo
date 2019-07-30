@@ -3,7 +3,8 @@ package rohit5k2.awsamplify.backend.helper
 import com.apollographql.apollo.api.Response
 
 interface NotifyUI<T> {
-    fun onData(data: Response<T>, type:ResponseOfType)
+    val responseType:ResponseOfType
+    fun onData(data: Response<T>)
     fun onError(error:String?)
     fun onComplete()
     fun onLog()

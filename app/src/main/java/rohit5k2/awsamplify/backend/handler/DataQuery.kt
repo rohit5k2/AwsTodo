@@ -23,7 +23,7 @@ class DataQuery<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBase<T>(c
 
                 override fun onResponse(response: Response<ListTodosQuery.Data>) {
                     L.e("onQuery data is : " + response.data()?.listTodos()?.items().toString())
-                    _notifyUI.onData(response as Response<T>, NotifyUI.ResponseOfType.QUERY_ALL)
+                    _notifyUI.onData(response as Response<T>)
                 }
 
             })

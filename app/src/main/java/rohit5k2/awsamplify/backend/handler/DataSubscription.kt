@@ -22,7 +22,7 @@ class DataSubscription<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBa
             override fun onResponse(response: Response<OnCreateTodoSubscription.Data>) {
                 var a = response.data().toString()
                 L.e("subscription data is : $a")
-                _notifyUI.onData(response as Response<T>, NotifyUI.ResponseOfType.SUBS_CREATE)
+                _notifyUI.onData(response as Response<T>)
             }
 
             override fun onCompleted() {
@@ -40,7 +40,7 @@ class DataSubscription<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBa
             }
 
             override fun onResponse(response: Response<OnDeleteTodoSubscription.Data>) {
-                _notifyUI.onData(response as Response<T>, NotifyUI.ResponseOfType.SUBS_DELETE)
+                _notifyUI.onData(response as Response<T>)
             }
 
             override fun onCompleted() {
@@ -58,7 +58,7 @@ class DataSubscription<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBa
             }
 
             override fun onResponse(response: Response<OnUpdateTodoSubscription.Data>) {
-                _notifyUI.onData(response as Response<T>, NotifyUI.ResponseOfType.SUBS_UPDATE)
+                _notifyUI.onData(response as Response<T>)
             }
 
             override fun onCompleted() {

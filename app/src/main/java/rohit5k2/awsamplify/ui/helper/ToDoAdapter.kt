@@ -36,6 +36,12 @@ class ToDoAdapter(context: Context, items:MutableList<ListTodosQuery.Item>?, not
             toDos?.size
     }
 
+    fun add(a:ListTodosQuery.Item){
+        toDos?.add(a)
+        notifyItemInserted(toDos?.size!!.minus(1))
+        //notifyDataSetChanged()
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.name?.text = toDos?.get(position)?.name()
         holder?.description.text = toDos?.get(position)?.description()
@@ -67,7 +73,7 @@ class ToDoAdapter(context: Context, items:MutableList<ListTodosQuery.Item>?, not
         snackbar.show()
     }
 
-    private fun undoDelete() {
+    fun undoDelete() {
         deleteHandler?.removeCallbacks(deleteRunnable)
         deleteHandler = null
 
