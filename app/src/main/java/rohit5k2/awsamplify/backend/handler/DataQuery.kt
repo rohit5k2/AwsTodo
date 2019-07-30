@@ -15,7 +15,7 @@ import rohit5k2.awsamplify.utils.L
 class DataQuery<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBase<T>(context, notifyUI) {
     fun getAll(){
         AWSCommHandler.mAwsAppSyncClient.query(ListTodosQuery.builder().build())
-            .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
+            .responseFetcher(AppSyncResponseFetchers.NETWORK_FIRST)
             .enqueue(object : GraphQLCall.Callback<ListTodosQuery.Data>(){
                 override fun onFailure(e: ApolloException) {
                     _notifyUI.onError(e.message)
