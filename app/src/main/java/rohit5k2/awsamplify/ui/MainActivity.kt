@@ -14,7 +14,11 @@ import rohit5k2.awsamplify.ui.helper.ToDoAdapter
 import rohit5k2.awsamplify.utils.L
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.amazonaws.amplify.generated.graphql.DeleteTodoMutation
+import rohit5k2.awsamplify.backend.handler.DataMutation
 import rohit5k2.awsamplify.ui.helper.SwipeToDeleteCallback
+import type.DeleteTodoInput
+import type.UpdateTodoInput
 
 class MainActivity : BaseActivity() {
 
@@ -26,18 +30,21 @@ class MainActivity : BaseActivity() {
         getAll()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    private fun initUi(){
-
-    }
-
     private fun loadToDoItems(data: MutableList<ListTodosQuery.Item>?){
-        toDoAdapter = ToDoAdapter(this@MainActivity, data)
         lv_todo.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         lv_todo.layoutManager = LinearLayoutManager(this)
+
+        toDoAdapter = ToDoAdapter(this@MainActivity, data, object:ToDoAdapter.NotifyRecyclerView{
+            override fun deleteIt(d: DeleteTodoInput) {
+                DataMutation(this@MainActivity, Notify<DeleteTodoMutation.Data>()).delete(d)
+            }
+
+            override fun updateIt(d: UpdateTodoInput) {
+
+            }
+
+        })
+
         lv_todo.adapter = toDoAdapter
 
         val swipeHandler = object : SwipeToDeleteCallback(this) {
@@ -46,6 +53,7 @@ class MainActivity : BaseActivity() {
                 adapter.deleteItem(viewHolder.adapterPosition)
             }
         }
+
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(lv_todo)
     }
@@ -59,7 +67,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun subscribe(){
-        //DataSubscription<OnCreateTodoSubscription>(this, notify<OnCreateTodoSubscription>()).subscribe()
+
     }
 
     private fun getAll(){
@@ -86,7 +94,9 @@ class MainActivity : BaseActivity() {
         }
 
         override fun onComplete() {
-
+            ThreadUtils.runOnUiThread{
+                lv_todo.adapter?.notifyDataSetChanged()
+            }
         }
 
         override fun onLog() {
