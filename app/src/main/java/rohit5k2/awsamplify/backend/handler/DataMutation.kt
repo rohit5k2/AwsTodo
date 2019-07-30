@@ -48,7 +48,7 @@ class DataMutation<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBase<T
             .mutate(UpdateTodoMutation.builder().input(u).build())
             .enqueue(object : GraphQLCall.Callback<UpdateTodoMutation.Data>(){
                 override fun onFailure(e: ApolloException) {
-
+                    _notifyUI.onError(e.message)
                 }
 
                 override fun onResponse(response: Response<UpdateTodoMutation.Data>) {

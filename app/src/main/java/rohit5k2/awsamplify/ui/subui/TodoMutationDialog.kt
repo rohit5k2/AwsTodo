@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.view.Window
 import kotlinx.android.synthetic.main.add_todo_dialog.*
 import rohit5k2.awsamplify.R
+import type.UpdateTodoInput
 
 /**
  * Created by Rohit on 7/30/2019:2:52 PM
  */
-class AddTodoDialog(context: Context, listener:AddTodoDataListener):Dialog(context) {
-    private val addTodoDataListener = listener
+class TodoMutationDialog(context: Context, mutationDialogListener:TodoDataMutationDialogListener, updateData:UpdateTodoInput?):Dialog(context) {
+    private var m = DialogMode.Add
+    private val l = mutationDialogListener
+    private val u = updateData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +26,23 @@ class AddTodoDialog(context: Context, listener:AddTodoDataListener):Dialog(conte
     }
 
     private fun initUI(){
+        if(u != null){
+            todo_name.setText(u.name())
+            todo_desc.setText(u.description())
+        }
+
         todo_entry_done.setOnClickListener{
-            addTodoDataListener.entryDone(todo_name.text.toString(), todo_desc.text.toString())
+            l.entryDone(todo_name.text.toString(), todo_desc.text.toString())
             dismiss()
         }
     }
 
-    interface AddTodoDataListener{
+    interface TodoDataMutationDialogListener{
         fun entryDone(name:String, desc:String)
+    }
+
+    enum class DialogMode{
+        Add,
+        Update
     }
 }

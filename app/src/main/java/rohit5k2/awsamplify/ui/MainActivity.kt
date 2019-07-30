@@ -18,7 +18,7 @@ import com.amazonaws.amplify.generated.graphql.*
 import rohit5k2.awsamplify.backend.handler.DataMutation
 import rohit5k2.awsamplify.backend.handler.DataSubscription
 import rohit5k2.awsamplify.ui.helper.SwipeToDeleteCallback
-import rohit5k2.awsamplify.ui.subui.AddTodoDialog
+import rohit5k2.awsamplify.ui.subui.TodoMutationDialog
 import type.CreateTodoInput
 import type.DeleteTodoInput
 import type.UpdateTodoInput
@@ -46,11 +46,20 @@ class MainActivity : BaseActivity() {
     }
 
     private fun showAddDialog(){
-        AddTodoDialog(this@MainActivity, object :AddTodoDialog.AddTodoDataListener{
+        TodoMutationDialog(this@MainActivity, object :TodoMutationDialog.TodoDataMutationDialogListener{
             override fun entryDone(name: String, desc: String) {
                 addData(name, desc)
             }
-        }).show()
+        }, null).show()
+    }
+
+    private fun showEditDialog(u:UpdateTodoInput){
+        TodoMutationDialog(this@MainActivity, object :TodoMutationDialog.TodoDataMutationDialogListener{
+            override fun entryDone(name: String, desc: String) {
+                val ui = UpdateTodoInput.builder().id(u.id()).name(name).description(desc).build()
+                updateData(ui)
+            }
+        }, u).show()
     }
 
     private fun loadToDoItems(data: MutableList<ListTodosQuery.Item>?){
@@ -62,8 +71,8 @@ class MainActivity : BaseActivity() {
                 DataMutation(this@MainActivity, Notify<DeleteTodoMutation.Data>(NotifyUI.ResponseOfType.DELETE)).delete(d)
             }
 
-            override fun updateIt(d: UpdateTodoInput) {
-
+            override fun updateIt(u: UpdateTodoInput) {
+                showEditDialog(u)
             }
 
         })
@@ -86,14 +95,18 @@ class MainActivity : BaseActivity() {
             .name(name)
             .description(desc)
             .build()
-        DataMutation(this, Notify<CreateTodoInput>(NotifyUI.ResponseOfType.ADD)).add(createToDoInput)
+        DataMutation(this, Notify<CreateTodoMutation>(NotifyUI.ResponseOfType.ADD)).add(createToDoInput)
+    }
+
+    private fun updateData(u:UpdateTodoInput){
+        DataMutation(this@MainActivity, Notify<UpdateTodoMutation>(NotifyUI.ResponseOfType.UPDATE)).update(u)
     }
 
     private fun subscribe(){
         //TODO: Need to find a better way to do this. Aim is to reduce it to only one call
         DataSubscription(this, Notify<OnCreateTodoSubscription>(NotifyUI.ResponseOfType.SUBS_CREATE)).onCreateSubscription()
         //DataSubscription(this, Notify<OnDeleteTodoSubscription>(NotifyUI.ResponseOfType.SUBS_DELETE)).onDeleteSubscription()
-        //DataSubscription(this, Notify<OnUpdateTodoSubscription>(NotifyUI.ResponseOfType.SUBS_UPDATE)).onUpdateSubscription()
+        DataSubscription(this, Notify<OnUpdateTodoSubscription>(NotifyUI.ResponseOfType.SUBS_UPDATE)).onUpdateSubscription()
     }
 
     private fun getAll(){
@@ -118,6 +131,11 @@ class MainActivity : BaseActivity() {
                     val c: ListTodosQuery.Item = ListTodosQuery.Item(x!!.__typename(), x?.id(), x.name(), x.description())
                     toDoAdapter?.add(c)
                 }
+                else if(responseType == NotifyUI.ResponseOfType.SUBS_UPDATE){
+                    val x = (data as Response<OnUpdateTodoSubscription.Data>).data()?.onUpdateTodo()
+                    val c = ListTodosQuery.Item(x!!.__typename(), x?.id(), x.name(), x.description())
+                    toDoAdapter?.update(c)
+                }
             }
         }
 
@@ -127,6 +145,9 @@ class MainActivity : BaseActivity() {
                 Toast.makeText(this@MainActivity, error, Toast.LENGTH_LONG).show()
                 if(responseType == NotifyUI.ResponseOfType.DELETE){
                     toDoAdapter?.undoDelete()
+                }
+                else if(responseType == NotifyUI.ResponseOfType.UPDATE){
+                    toDoAdapter?.undoUpdate()
                 }
             }
         }
