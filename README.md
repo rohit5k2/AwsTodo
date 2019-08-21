@@ -1,6 +1,6 @@
 "# AwsTodo" 
 
-This is the full implementation of AWS amplify tutorial using AppSync.
+This is the full implementation of ToDo application using AWS amplify and AppSync.
 
 The tutorial is located at
     
