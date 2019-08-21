@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.utils
+package rohit5k2.awstodo.utils
 
 import android.util.Log
 

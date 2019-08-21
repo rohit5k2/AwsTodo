@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.backend.handler
+package rohit5k2.awstodo.backend.handler
 
 import android.content.Context
 import com.amazonaws.amplify.generated.graphql.ListTodosQuery
@@ -6,8 +6,8 @@ import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers
 import com.apollographql.apollo.GraphQLCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
-import rohit5k2.awsamplify.backend.helper.NotifyUI
-import rohit5k2.awsamplify.utils.L
+import rohit5k2.awstodo.backend.helper.NotifyUI
+import rohit5k2.awstodo.utils.L
 
 /**
  * Created by Rohit on 7/29/2019:3:57 PM

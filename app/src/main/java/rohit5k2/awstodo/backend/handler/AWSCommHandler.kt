@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.backend.handler
+package rohit5k2.awstodo.backend.handler
 
 import android.content.Context
 import com.amazonaws.mobile.config.AWSConfiguration

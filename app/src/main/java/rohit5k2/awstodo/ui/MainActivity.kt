@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.ui
+package rohit5k2.awstodo.ui
 
 import android.os.Bundle
 import android.widget.Toast
@@ -7,18 +7,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils
 import com.apollographql.apollo.api.Response
 import kotlinx.android.synthetic.main.activity_main.*
-import rohit5k2.awsamplify.R
-import rohit5k2.awsamplify.backend.handler.DataQuery
-import rohit5k2.awsamplify.backend.helper.NotifyUI
-import rohit5k2.awsamplify.ui.helper.ToDoAdapter
-import rohit5k2.awsamplify.utils.L
+import rohit5k2.awstodo.R
+import rohit5k2.awstodo.backend.handler.DataQuery
+import rohit5k2.awstodo.backend.helper.NotifyUI
+import rohit5k2.awstodo.ui.helper.ToDoAdapter
+import rohit5k2.awstodo.utils.L
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.amazonaws.amplify.generated.graphql.*
-import rohit5k2.awsamplify.backend.handler.DataMutation
-import rohit5k2.awsamplify.backend.handler.DataSubscription
-import rohit5k2.awsamplify.ui.helper.SwipeToDeleteCallback
-import rohit5k2.awsamplify.ui.subui.TodoMutationDialog
+import rohit5k2.awstodo.backend.handler.DataMutation
+import rohit5k2.awstodo.backend.handler.DataSubscription
+import rohit5k2.awstodo.ui.helper.SwipeToDeleteCallback
+import rohit5k2.awstodo.ui.subui.TodoMutationDialog
 import type.CreateTodoInput
 import type.DeleteTodoInput
 import type.UpdateTodoInput

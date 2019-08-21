@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.ui.helper
+package rohit5k2.awstodo.ui.helper
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import com.amazonaws.amplify.generated.graphql.ListTodosQuery
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.todo_item.view.*
-import rohit5k2.awsamplify.R
-import rohit5k2.awsamplify.ui.BaseActivity
+import rohit5k2.awstodo.R
+import rohit5k2.awstodo.ui.BaseActivity
 import android.os.Handler
 import type.DeleteTodoInput
 import type.UpdateTodoInput

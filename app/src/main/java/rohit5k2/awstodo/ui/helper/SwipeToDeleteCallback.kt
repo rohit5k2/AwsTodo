@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.ui.helper
+package rohit5k2.awstodo.ui.helper
 
 import android.content.Context
 import android.graphics.*

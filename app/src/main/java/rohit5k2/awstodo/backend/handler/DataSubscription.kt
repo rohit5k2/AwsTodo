@@ -1,14 +1,14 @@
-package rohit5k2.awsamplify.backend.handler
+package rohit5k2.awstodo.backend.handler
 
 import android.content.Context
 import com.amazonaws.amplify.generated.graphql.OnCreateTodoSubscription
 import com.amazonaws.amplify.generated.graphql.OnDeleteTodoSubscription
 import com.amazonaws.amplify.generated.graphql.OnUpdateTodoSubscription
-import rohit5k2.awsamplify.backend.helper.NotifyUI
+import rohit5k2.awstodo.backend.helper.NotifyUI
 import com.amazonaws.mobileconnectors.appsync.AppSyncSubscriptionCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
-import rohit5k2.awsamplify.utils.L
+import rohit5k2.awstodo.utils.L
 
 class DataSubscription<T>(context: Context, notifyUI: NotifyUI<T>):DataHandlerBase<T>(context, notifyUI) {
     fun onCreateSubscription(){

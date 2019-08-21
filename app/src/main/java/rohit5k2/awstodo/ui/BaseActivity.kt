@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.ui
+package rohit5k2.awstodo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

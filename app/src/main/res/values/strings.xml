@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Aws amplify</string>
+    <string name="app_name">Aws TODO</string>
     <string name="undo_delete">Undo delete</string>
 </resources>

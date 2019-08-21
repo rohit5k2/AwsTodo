@@ -1,11 +1,11 @@
-package rohit5k2.awsamplify.ui.subui
+package rohit5k2.awstodo.ui.subui
 
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.Window
 import kotlinx.android.synthetic.main.add_todo_dialog.*
-import rohit5k2.awsamplify.R
+import rohit5k2.awstodo.R
 import type.UpdateTodoInput
 
 /**
