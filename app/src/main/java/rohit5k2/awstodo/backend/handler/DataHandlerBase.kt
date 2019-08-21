@@ -1,7 +1,7 @@
-package rohit5k2.awsamplify.backend.handler
+package rohit5k2.awstodo.backend.handler
 
 import android.content.Context
-import rohit5k2.awsamplify.backend.helper.NotifyUI
+import rohit5k2.awstodo.backend.helper.NotifyUI
 
 abstract class DataHandlerBase<T>(context: Context, notifyUI: NotifyUI<T>) {
     protected var _notifyUI = notifyUI

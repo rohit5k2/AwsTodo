@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify
+package rohit5k2.awstodo
 
 import org.junit.Test
 

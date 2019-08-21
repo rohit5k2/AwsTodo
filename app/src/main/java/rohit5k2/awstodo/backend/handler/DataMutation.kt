@@ -1,10 +1,10 @@
-package rohit5k2.awsamplify.backend.handler
+package rohit5k2.awstodo.backend.handler
 
 import android.content.Context
 import com.amazonaws.amplify.generated.graphql.CreateTodoMutation
 import com.amazonaws.amplify.generated.graphql.DeleteTodoMutation
 import com.amazonaws.amplify.generated.graphql.UpdateTodoMutation
-import rohit5k2.awsamplify.backend.helper.NotifyUI
+import rohit5k2.awstodo.backend.helper.NotifyUI
 import type.CreateTodoInput
 import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.GraphQLCall

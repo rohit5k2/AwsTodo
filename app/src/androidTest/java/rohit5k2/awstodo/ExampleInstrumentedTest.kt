@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify
+package rohit5k2.awstodo
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

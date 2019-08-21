@@ -1,4 +1,4 @@
-package rohit5k2.awsamplify.backend.helper
+package rohit5k2.awstodo.backend.helper
 
 import com.apollographql.apollo.api.Response
 
